@@ -2,13 +2,13 @@
 const cardsContainer = document.getElementById('cardsContainer')
 // Definir en una variable la ruta de el array donde estan los objetos
 let arrayEvento = data.eventos
-// Defrinir en una variable la ruta de la fecha con la se va a categorizar los eventos
+// Defrinir en una variable la ruta de la fecha con la se van a categorizar los eventos
 let fecha = data.fechaActual
 // Convertir la fecha en un número y eliminar los guiones "-" para filtrar 
 fecha = parseInt(fecha.replace(/-/g, ''))
 
 /*Funcion que recibe como parametro el array con los eventos y los filtra dependiendo
-si la fecha actual es menor a la fecha asignada al evento y definir que el evento esta por venir.
+si la fecha actual es mayor a la fecha asignada al evento y definir que el evento ya paso.
 Los objetos que cumplen con esta condicion son pusheados a "eventosFiltrados".
 Y al final la funcion retorna este array de eventos ya filtrados*/
 function filtroEventos(arrayDeEventos) {
