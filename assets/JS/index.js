@@ -33,20 +33,3 @@ cardsContainer.innerHTML = cadenaEventos
 
 console.log(cadenaEventos)
 
-
-
-
-
-
-
-/*<div class="card" style="width: 22rem;">
-      <img src="./assets/images/Feriadecomidas7.jpg" class="card-img-top" alt="imgCard">
-      <div class="card-body text-center">
-        <h5 class="card-title">Food Festival</h5>
-        <p class="card-text">Enjoy your favorite dishes from different countries.</p>
-        <div class="priceBtn gap-4">
-          <p class="m-0">Price: $5</p>
-          <a href="./assets/pages/details.html" class="btn btn-primary">More Info</a>
-        </div>
-      </div>
-    </div>*/
