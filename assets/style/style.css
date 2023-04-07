@@ -62,10 +62,8 @@ body {
     /* CHECKBOXES */
 
 .checkbox {
-    padding: 4rem;
-    font-size: 22px;
-    align-items: center;
-    color: #fff;
+    justify-content: center;
+    margin-top: 4rem;
 }
 
 .checkbox form {
@@ -79,6 +77,8 @@ body {
 .search-container {
     justify-content: end;
     height: 40px;
+    margin-left: 5rem;
+    order: 1;
 }
 
 
@@ -90,6 +90,12 @@ body {
 .btn-outline-success:hover {
     background-color: #D90368;
     border-color: #D90368;
+}
+
+.checkboxs {
+    font-size: 17px;
+    color: #fff;
+    max-width: 124px;
 }
 
 
