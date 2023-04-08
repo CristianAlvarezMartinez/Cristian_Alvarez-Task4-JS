@@ -15,15 +15,22 @@ printCategories(arrayCategories)
 
 // EVENTOS
 
+const inputSearch = document.getElementById('inputSearch')
+inputSearch.addEventListener('keyup',() => {
+  const aux = combinedFilter(arrayEventos, foodFairBox, inputSearch.value)
+  printCards(aux)
+})
+
 const foodFairBox = document.getElementById('FoodFair')
 foodFairBox.addEventListener('change', () => {
-  printCards(filterByCategory(arrayEventos, foodFairBox, foodFairBox.id))
+  const aux = combinedFilter(arrayEventos, foodFairBox, inputSearch.value)
+  printCards(aux)
   
 })
 
 const museum = document.getElementById('Museum')
 museum.addEventListener('change', () => {
-  printCards(filterByCategory(arrayEventos, museum, museum.id))
+  printCards(filterByCategory(arrayEventos, museum))
 })
 
 // FUNCIONES
@@ -42,35 +49,43 @@ function printCategories(array) {
 }
 
 function printCards(array) {
-  let template = array.reduce((acu, acc) => {
-    return acu + `<div class="card">
-                    <img src="${acc.image}" class="card-img-top" alt="imgCard">
-                    <div class="card-body text-center">
-                    <h5 class="card-title">${acc.name}</h5>
-                    <p class="card-text">${acc.description}</p>
-                    <div class="priceBtn mhere gap-4">
-                    <p class="m-0">Price: $${acc.price}</p>
-                    <a href="./assets/pages/details.html?id=${acc.name}" class="btn btn-primary">More Info</a>
-                    </div>
-                    </div>
-                  </div>`
-  },'')
-  cardsContainer.innerHTML = template
+  if(array.length == 0){
+    cardsContainer.innerHTML = `<h1 class="text-center text-light">THERE'S NO FOUND</h1>`
+  }else {
+    let template = array.reduce((acu, acc) => {
+      return acu + `<div class="card">
+                      <img src="${acc.image}" class="card-img-top" alt="imgCard">
+                      <div class="card-body text-center">
+                      <h5 class="card-title">${acc.name}</h5>
+                      <p class="card-text">${acc.description}</p>
+                      <div class="priceBtn mhere gap-4">
+                      <p class="m-0">Price: $${acc.price}</p>
+                      <a href="./assets/pages/details.html?id=${acc.name}" class="btn btn-primary">More Info</a>
+                      </div>
+                      </div>
+                    </div>`
+    },'')
+    cardsContainer.innerHTML = template
+  }
+
+  
 }
 
 function filterByText(array, txt) {
   return array.filter(evento => evento.name.toLowerCase().includes(txt.toLowerCase()) || evento.description.toLowerCase().includes(txt.toLowerCase()))
 }
 
-function filterByCategory(array, element, id) {
+function filterByCategory(array, element) {
     if(element.checked == true){
-      return array.filter(evento => evento.category.replace(/\s+/g, '') == id)
+      return array.filter(evento => evento.category.replace(/\s+/g, '') == element.id)
       
     }
     return array
 }
 
-// function combinedFilter() {
-
-// }
+function combinedFilter(array, element, txt) {
+  const filteredByCategory = filterByCategory(array, element)
+  const filteredByText = filterByText(filteredByCategory, txt)
+  return filteredByText
+}
 
