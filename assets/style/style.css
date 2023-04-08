@@ -5,7 +5,9 @@
     padding: 0;
 }
 
-
+html {
+    height: 100%;
+}
 
 body {
     background-color: #212122;

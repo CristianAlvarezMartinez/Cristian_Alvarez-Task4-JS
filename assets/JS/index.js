@@ -17,23 +17,36 @@ printCategories(arrayCategories)
 
 const inputSearch = document.getElementById('inputSearch')
 inputSearch.addEventListener('keyup',() => {
-  const aux = combinedFilter(arrayEventos, foodFairBox, inputSearch.value)
-  printCards(aux)
+
 })
 
 const foodFairBox = document.getElementById('FoodFair')
 foodFairBox.addEventListener('change', () => {
-  const aux = combinedFilter(arrayEventos, foodFairBox, inputSearch.value)
-  printCards(aux)
-  
+
 })
 
 const museum = document.getElementById('Museum')
 museum.addEventListener('change', () => {
-  printCards(filterByCategory(arrayEventos, museum))
+
+
 })
 
 // FUNCIONES
+
+function template(array) {
+  let template = array.map(evento => `<div class="card">
+                                  <img src="${evento.image}" class="card-img-top" alt="imgCard">
+                                  <div class="card-body text-center">
+                                  <h5 class="card-title">${evento.name}</h5>
+                                  <p class="card-text">${evento.description}</p>
+                                  <div class="priceBtn mhere gap-4">
+                                  <p class="m-0">Price: $${evento.price}</p>
+                                  <a href="./assets/pages/details.html?id=${evento.name}" class="btn btn-primary">More Info</a>
+                                  </div>
+                                  </div>
+                                </div>` )
+  return template                            
+}
 
 function printCategories(array) {
   if(array.length === 0){
