@@ -23,7 +23,8 @@ checkboxContainer.addEventListener('change',()=>{
 
 const inputSearch = document.getElementById('inputSearch')
 inputSearch.addEventListener('keyup',() => {
-  printCards(filterByText(arrayEventos, inputSearch.value))
+  let aux = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+  printCards(combinedFilter(aux, inputSearch.value))
 })
 
 
@@ -42,7 +43,6 @@ function printCategories(array) {
 }
 
 function printCards(array) {
-
     let template = array.reduce((acu, acc) => {
       return acu + `<div class="card">
                       <img src="${acc.image}" class="card-img-top" alt="imgCard">
@@ -67,7 +67,7 @@ function filterByCategory(array) {
   let arrayFilter = [];
   array.reduce((acu, acc)=>{
     arrayEventos.filter(evento => {
-      if(evento.category.replace(/\s+/g, '') === acc.id){
+      if(evento.category.replace(/\s+/g, '') === acc.value){
         arrayFilter.push(evento)
       }
     })
@@ -78,7 +78,7 @@ function filterByCategory(array) {
   return arrayFilter
 }
 
-function combinedFilter(array, txt) {
+function combinedFilter(array, txt) { 
     const filteredByCategory = filterByCategory(array)
     const filteredByText = filterByText(filteredByCategory, txt)
     return filteredByText

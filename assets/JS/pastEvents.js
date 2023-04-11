@@ -25,7 +25,8 @@ checkboxContainer.addEventListener('change',()=>{
 
 const inputSearch = document.getElementById('inputSearch')
 inputSearch.addEventListener('keyup',() => {
-  printCards(filterByText(eventosFiltrados, inputSearch.value))
+  let aux = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+  printCards(combinedFilter(aux, inputSearch.value))
 })
 
 // FUNCIONES
