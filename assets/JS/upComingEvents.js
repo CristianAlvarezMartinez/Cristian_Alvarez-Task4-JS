@@ -1,33 +1,29 @@
-import {filtroEventos, printCategories, printCards, combinedFilter} from '../funcionesJS/funciones.js'
+import {filtroEventos, printCategories, PrintCardsGeneral, combinedFilter} from '../funcionesJS/funciones.js'
 
 // CARDS DINAMICAS
 const cardsContainer = document.getElementById('cards-container')
-const search = document.getElementById('inputSearch')
+const inputSearch = document.getElementById('inputSearch')
 const checkboxContainer = document.getElementById('checkbox-container')
-let arrayEventos = data.eventos
-let fecha = data.fechaActual
-fecha = parseInt(fecha.replace(/-/g, '')) //20220101
-let eventosFiltrados = arrayEventos.filter(i => parseInt(i.date.replace(/-/g, '')) > fecha)
+let arrayEventos;
+let fecha;
+let eventosFiltrados;
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+  .then(responde => responde.json().then(data => {
+    arrayEventos = data.events
+    fecha = parseInt(data.currentDate.replaceAll('-', '')) 
+    eventosFiltrados = filtroEventos(arrayEventos, fecha)
+    PrintCardsGeneral(eventosFiltrados, cardsContainer)
+    printCategories(eventosFiltrados, checkboxContainer)
+    
+  }))
+  .catch(error => console.log(error))
 
-// CHECKBOX DINAMICOS
-const categories = arrayEventos.map(evento => evento.category)
-const setCategories = new Set(categories)
-const arrayCategories = Array.from(setCategories)
+  function eventFunction() {
+    let aux = [...document.querySelectorAll('input[type="checkbox"]:checked')]
+    let filtro = combinedFilter(aux, inputSearch.value, eventosFiltrados)
+    printCards(filtro, cardsContainer)
+  }
 
+checkboxContainer.addEventListener('change', eventFunction)
 
-// EJECUCIONES
-printCategories(arrayCategories, checkboxContainer)
-filtroEventos(arrayEventos, fecha, cardsContainer)
-
-// EVENTOS
-
-checkboxContainer.addEventListener('change',()=>{
-  let aux = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-  printCards(combinedFilter(aux, inputSearch.value, eventosFiltrados), cardsContainer)
-})
-
-
-search.addEventListener('keyup',() => {
-  let aux = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-  printCards(combinedFilter(aux, inputSearch.value, eventosFiltrados), cardsContainer)
-})
+inputSearch.addEventListener('keyup', eventFunction)
