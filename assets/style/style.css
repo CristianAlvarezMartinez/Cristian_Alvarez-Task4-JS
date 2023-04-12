@@ -68,9 +68,9 @@ body {
 
     /* CHECKBOXES */
 
-.checkbox {
+.checkbox-container {
     justify-content: center;
-    margin-top: 4rem;
+    margin: 4rem 0 2rem 0;
 }
 
 .checkbox form {
@@ -82,10 +82,8 @@ body {
 }
 
 .search-container {
-    justify-content: end;
     height: 40px;
-    margin-left: 5rem;
-    order: 1;
+    justify-content: center;
 }
 
 
@@ -200,10 +198,6 @@ footer p {
     justify-content: space-between;
 }
 
-.footerClass {
-    margin-top: 9.8rem;
-}
-
     /* FORMULARIO (CONTACT) */
 
 .form-contenedor {
@@ -300,13 +294,12 @@ form input:focus, textarea:focus {
 
 table {
     width: 90%;
-    height: 70vh;
     margin: 2rem auto;
 }
 
 table tr th {
     background-color: #3c096c;
-    padding: 5px 0;
+    padding: 5px 5px;
     color: #D90368;
     font-size: 20px;
 }
@@ -314,9 +307,9 @@ table tr th {
 table, tr, th, td {
     border: 1px solid #8887874a;
     font-size: 18px;
+    padding: 5px 5px;
     color: #fff;
 }
-
 
 
 
@@ -326,11 +319,7 @@ table, tr, th, td {
     /* RESPONSIVE */
 
 @media screen and (max-width: 1567px) {
-    .search-container {
-        width: 450px;
-        height: 40px;
-        justify-items: end;
-    }
+
 
     .detail-contenedor {
         height: 40%;
@@ -344,16 +333,6 @@ table, tr, th, td {
     .details ul {
         margin-top: 3.5rem;
         font-size: 1.5rem;
-    }
-}
-
-
-
-
-@media screen and (max-width: 1399px) {
-   
-    .search-container {
-            justify-content: center;
     }
 }
 

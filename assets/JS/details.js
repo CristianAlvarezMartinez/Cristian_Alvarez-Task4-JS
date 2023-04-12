@@ -6,7 +6,7 @@ let eventsArray = data.eventos
 
 let eventFound = eventsArray.find(event => event.name == id)
 
-const print = event => {
+function print(event) {
     let template =  `<div class="detail-contenedor ">
                 <img class="" src="${event.image}" alt="imgDetail">
                 <div class="details">
