@@ -130,7 +130,7 @@ export function maxCapacity(array) {
 }
 
 export function printTB1(objMax, objMin, objMaxCapacity, container) {
-    let template = `<tr class="">
+    let template = `<tr>
                         <td>${objMax.name} ${objMax.porcentaje}%</td>
                         <td>${objMin.name} ${objMin.porcentaje}%</td>
                         <td>${objMaxCapacity.name} ${objMaxCapacity.capacity}</td>
@@ -138,23 +138,40 @@ export function printTB1(objMax, objMin, objMaxCapacity, container) {
     container.innerHTML += template
 }
 
-export function ucReveAndAtten (ucArray){
-  return ucArray.map(event => {
-    return {...event, revenues: event.price*event.estimate,
-                      attendance: (event.estimate / event.capacity)*100 }
-  })
-}
-
-export function pastReveAndAtten (pastArray){
-  return pastArray.map(event => {
-    return {...event, revenues: event.price*event.estimate,
-                      attendance: parseFloat(((event.assistance / event.capacity)*100).toFixed(2))}
-  })
-}
-
 export function eventsWithPorcen(array) {
   let aux = array.map(evento => {
     return {...evento, porcentaje: parseFloat(((evento.assistance/evento.capacity)*100).toFixed(2))}
   })
   return aux
+}
+
+export function onlyCategories(array){
+  let arrayE = array.map(event => event.category)
+  let newarray = [...new Set(arrayE)]
+  return newarray
+}
+
+export function printTB2(arrayCat, arrayeventos, container, param){
+ let arrayTr = arrayCat.map(cat => {
+      let aux = arrayeventos.filter(eve => eve.category == cat)
+      let revenues = 0
+      let attendance = 0
+      let contador = 0
+      aux.forEach(eve => {
+         let res = eve.price*eve[param]
+         revenues += res
+      })
+      aux.forEach(eve => {
+          let res = parseFloat(((eve[param]/eve.capacity)*100).toFixed(1))
+          attendance += res
+          contador++
+      })
+      return `<tr class="trContainer">
+                  <td>${cat}</td>
+                  <td>${revenues}</td>
+                  <td>${(attendance/contador).toFixed(1)} %</td>
+              </tr>`
+  })
+  let templates = arrayTr.join(' ')
+  container.innerHTML += templates
 }

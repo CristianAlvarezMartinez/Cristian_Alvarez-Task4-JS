@@ -297,7 +297,12 @@ table {
     margin: 2rem auto;
 }
 
-table tr th {
+table tr{
+    border: 1px solid #8887874a;
+
+}
+
+table th {
     text-align: center;
     background-color: #3c096c;
     padding: 5px 5px;
@@ -306,7 +311,6 @@ table tr th {
 }
 
 table, tr, th, td {
-    border: 1px solid #8887874a;
     font-size: 18px;
     padding: 5px 5px;
     color: #fff;

@@ -1,8 +1,8 @@
-import {filtroEventosPA, filtroEventos, maxPorcentaje, minPorcentaje, maxCapacity, printTB1, ucReveAndAtten, pastReveAndAtten, eventsWithPorcen} from '../funcionesJS/funciones.js'
-
-
+import {filtroEventosPA, filtroEventos, maxPorcentaje, minPorcentaje, maxCapacity, printTB1, eventsWithPorcen, onlyCategories, printTB2} from '../funcionesJS/funciones.js'
 
 const tBodyContainer = document.getElementById('tbody-table1')
+const tBodyContainer2 = document.getElementById('tbody-table2')
+const tBodyContainer3 = document.getElementById('tbody-table3')
 let eventsArray;
 let fecha;
 
@@ -19,19 +19,13 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
     const highestPorc = maxPorcentaje(eventsWithPorcentaje)
     const lowerPorc = minPorcentaje(eventsWithPorcentaje)
     const largerCapac = maxCapacity(eventsWithPorcentaje)
-//Array de upComingEvents con propiedades *revenues* y *attendance*
-    const newUpComingEvens = ucReveAndAtten(upCommingEvents)
-// Array de pastEvents con propiedades *revenues* y *attendace*
-    const newPastEvents = pastReveAndAtten(pastEvents)
+// Array de solo las categorias
+    const arrayOnlyCategories = onlyCategories(eventsArray)
+
 //Ejecuciones
     printTB1(highestPorc, lowerPorc, largerCapac, tBodyContainer)
-
-
-    console.log(newUpComingEvens, newPastEvents)
-
-
+    printTB2(arrayOnlyCategories, upCommingEvents, tBodyContainer2, 'estimate')
+    printTB2(arrayOnlyCategories, pastEvents, tBodyContainer3, 'assistance')
 
   }))
   .catch(error => console.log(error))
-
-
