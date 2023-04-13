@@ -77,21 +77,6 @@ export function printCards(array, container) {
 export function filtroEventos(array, fecha){
     let fe = array.filter(i => parseInt(i.date.replaceAll('-', '')) > fecha)
     return fe 
-   //   let template = ux.reduce((acu, acc) => {
-  //       return acu + `<div class="card">
-  //                       <img src="${acc.image}">
-  //                       <div class="card-body text-center">
-  //                       <h5 class="card-title">${acc.name}</h5>
-  //                       <p class="card-text">${acc.description}</p>
-  //                       <div class="priceBtn gap-4">
-  //                           <p class="m-0">Price: $${acc.price}</p>
-  //                           <a href="../pages/details.html?id=${acc.name}" class="btn btn-primary">More Info</a>
-  //                       </div>
-  //                       </div>
-  //                     </div>
-  // `
-  //   },'')
-  //   container.innerHTML = template
   }
 
 // PASTEVENTS FUNCTIONS
@@ -144,11 +129,32 @@ export function maxCapacity(array) {
     return event;
 }
 
-export function print(objMax, objMin, objMaxCapacity, container) {
+export function printTB1(objMax, objMin, objMaxCapacity, container) {
     let template = `<tr class="">
                         <td>${objMax.name} ${objMax.porcentaje}%</td>
                         <td>${objMin.name} ${objMin.porcentaje}%</td>
                         <td>${objMaxCapacity.name} ${objMaxCapacity.capacity}</td>
                     </tr>`
     container.innerHTML += template
+}
+
+export function ucReveAndAtten (ucArray){
+  return ucArray.map(event => {
+    return {...event, revenues: event.price*event.estimate,
+                      attendance: (event.estimate / event.capacity)*100 }
+  })
+}
+
+export function pastReveAndAtten (pastArray){
+  return pastArray.map(event => {
+    return {...event, revenues: event.price*event.estimate,
+                      attendance: parseFloat(((event.assistance / event.capacity)*100).toFixed(2))}
+  })
+}
+
+export function eventsWithPorcen(array) {
+  let aux = array.map(evento => {
+    return {...evento, porcentaje: parseFloat(((evento.assistance/evento.capacity)*100).toFixed(2))}
+  })
+  return aux
 }

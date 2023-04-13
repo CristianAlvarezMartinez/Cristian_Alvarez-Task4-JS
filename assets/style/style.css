@@ -298,6 +298,7 @@ table {
 }
 
 table tr th {
+    text-align: center;
     background-color: #3c096c;
     padding: 5px 5px;
     color: #D90368;

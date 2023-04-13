@@ -1,24 +1,37 @@
-import {filtroEventosPA, maxPorcentaje, minPorcentaje, maxCapacity, print} from '../funcionesJS/funciones.js'
-// const eventsArray = data.eventos
-// let fecha = data.fechaActual
-// // fecha = parseInt(fecha.replace(/-/g, '')) //20220101
+import {filtroEventosPA, filtroEventos, maxPorcentaje, minPorcentaje, maxCapacity, printTB1, ucReveAndAtten, pastReveAndAtten, eventsWithPorcen} from '../funcionesJS/funciones.js'
+
+
+
 const tBodyContainer = document.getElementById('tbody-table1')
 let eventsArray;
-let pastEvents;
 let fecha;
-let eventsWithPorcentaje;
 
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
   .then(response => response.json().then(data =>{
     eventsArray = data.events
     fecha = parseInt(data.currentDate.replaceAll('-', ''))
-    pastEvents = filtroEventosPA(eventsArray, fecha)
-    eventsWithPorcentaje =  pastEvents.map(evento => {
-      return {...evento, porcentaje: parseFloat(((evento.assistance/evento.capacity)*100).toFixed(2))}
-    })
-    let highestPorc = maxPorcentaje(eventsWithPorcentaje)
-    let lowerPorc = minPorcentaje(eventsWithPorcentaje)
-    let largerCapac = maxCapacity(eventsWithPorcentaje)
-    print(highestPorc, lowerPorc, largerCapac, tBodyContainer)
+    const pastEvents = filtroEventosPA(eventsArray, fecha)
+    const upCommingEvents = filtroEventos(eventsArray, fecha)
+    
+// Array de eventos con propiedad *porcentaje*
+   const  eventsWithPorcentaje =  eventsWithPorcen(eventsArray)
+// Asignaiones
+    const highestPorc = maxPorcentaje(eventsWithPorcentaje)
+    const lowerPorc = minPorcentaje(eventsWithPorcentaje)
+    const largerCapac = maxCapacity(eventsWithPorcentaje)
+//Array de upComingEvents con propiedades *revenues* y *attendance*
+    const newUpComingEvens = ucReveAndAtten(upCommingEvents)
+// Array de pastEvents con propiedades *revenues* y *attendace*
+    const newPastEvents = pastReveAndAtten(pastEvents)
+//Ejecuciones
+    printTB1(highestPorc, lowerPorc, largerCapac, tBodyContainer)
+
+
+    console.log(newUpComingEvens, newPastEvents)
+
+
+
   }))
   .catch(error => console.log(error))
+
+

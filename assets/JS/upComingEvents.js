@@ -7,6 +7,7 @@ const checkboxContainer = document.getElementById('checkbox-container')
 let arrayEventos;
 let fecha;
 let eventosFiltrados;
+
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
   .then(responde => responde.json().then(data => {
     arrayEventos = data.events
@@ -21,7 +22,7 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
   function eventFunction() {
     let aux = [...document.querySelectorAll('input[type="checkbox"]:checked')]
     let filtro = combinedFilter(aux, inputSearch.value, eventosFiltrados)
-    printCards(filtro, cardsContainer)
+    PrintCardsGeneral(filtro, cardsContainer)
   }
 
 checkboxContainer.addEventListener('change', eventFunction)
