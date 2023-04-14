@@ -169,7 +169,7 @@ export function printTB2(arrayCat, arrayeventos, container, param){
       return `<tr class="trContainer">
                   <td>${cat}</td>
                   <td>${revenues}</td>
-                  <td>${(attendance/contador).toFixed(1)} %</td>
+                  <td>${(attendance/contador).toFixed(2)} %</td>
               </tr>`
   })
   let templates = arrayTr.join(' ')

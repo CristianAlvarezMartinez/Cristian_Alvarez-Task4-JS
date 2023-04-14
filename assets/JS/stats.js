@@ -21,11 +21,10 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
     const largerCapac = maxCapacity(eventsWithPorcentaje)
 // Array de solo las categorias
     const arrayOnlyCategories = onlyCategories(eventsArray)
-
 //Ejecuciones
     printTB1(highestPorc, lowerPorc, largerCapac, tBodyContainer)
-    printTB2(arrayOnlyCategories, upCommingEvents, tBodyContainer2, 'estimate')
+    printTB2(onlyCategories(upCommingEvents), upCommingEvents, tBodyContainer2, 'estimate')
     printTB2(arrayOnlyCategories, pastEvents, tBodyContainer3, 'assistance')
+    console.log(upCommingEvents)
 
   }))
-  .catch(error => console.log(error))
